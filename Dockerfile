@@ -95,7 +95,7 @@ ARG PYTHON_VERSION
 ARG MARCH
 ENV LANG C.UTF-8
 
-ENV CFLAGS -I/usr/include/openssl --march=${MARCH}
+ENV CFLAGS -I/usr/include/openssl -march=${MARCH}
 
 RUN set -ex \
     && cd /usr/src/python \
