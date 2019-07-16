@@ -92,6 +92,7 @@ FROM build-setup as builder
 
 ARG BUILD_ARGS
 ARG PYTHON_VERSION
+ARG MARCH
 ENV LANG C.UTF-8
 
 ENV CFLAGS -I/usr/include/openssl --march=${MARCH}

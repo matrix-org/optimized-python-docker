@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -euo pipefail
+set -euox pipefail
 
 LTO=1 OPTIMAL=1 MARCH=skylake-avx512 PYTHON_VERSION=3.7.4 make build-image
 
