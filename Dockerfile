@@ -31,7 +31,7 @@
 #
 ###############################################################################
 
-FROM gcr.io/google-containers/debian-base-amd64:v1.0.0 as runtime
+FROM ubuntu:disco as runtime
 
 ENV PATH /usr/local/bin:$PATH
 
@@ -85,6 +85,7 @@ RUN \
 
 LABEL stage BUILD-SETUP
 LABEL version ${PYTHON_VERSION}
+LABEL march ${CFLAGS}
 
 ###############################################################################
 FROM build-setup as builder
@@ -93,9 +94,7 @@ ARG BUILD_ARGS
 ARG PYTHON_VERSION
 ENV LANG C.UTF-8
 
-#RUN sleep 6000 || echo "whee"
-
-ENV CFLAGS -I/usr/include/openssl -march=skylake-avx512
+ENV CFLAGS -I/usr/include/openssl ${CFLAGS}
 
 RUN set -ex \
     && cd /usr/src/python \
@@ -133,15 +132,13 @@ RUN ["/bin/bash", "-c", "if [[ $( echo ${PYTHON_VERSION} | cut -d'.' -f1 ) == '3
 
 LABEL stage BUILDER
 LABEL version ${PYTHON_VERSION}
+LABEL march ${CFLAGS}
 
 ###############################################################################
 FROM builder as post-build
 
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
 ENV PYTHON_PIP_VERSION 19.1.1
-
-
-COPY ./ipython_config.py /
 
 RUN set -ex; ldconfig
 RUN set -ex; curl -sL -o get-pip.py 'https://bootstrap.pypa.io/get-pip.py';

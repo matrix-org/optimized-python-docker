@@ -35,10 +35,15 @@ ifdef LTO
 	TAG := ${TAG}-lto
 endif
 
+ifndef MARCH
+	MARCH = x86-64
+endif
+
+TAG := ${TAG}-${MARCH}
 
 build-image:
 	@echo building ${IMAGE_TAG}
-	@docker build ${PROXY_ARGS} --build-arg=PYTHON_VERSION=${PYTHON_VERSION} --build-arg=BUILD_ARGS="${BUILD_ARGS}" -t ${IMAGE_TAG} --compress .
+	@docker build ${PROXY_ARGS} --build-arg=PYTHON_VERSION=${PYTHON_VERSION} --build-arg=CFLAGS="--march=${MARCH}" --build-arg=BUILD_ARGS="${BUILD_ARGS}" -t ${IMAGE_TAG} --compress .
 
 push-image:
 	@echo pushing ${IMAGE_TAG}
