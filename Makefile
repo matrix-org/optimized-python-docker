@@ -5,7 +5,7 @@ include .version
 PYTHON_VERSION ?= 3.7.4
 FUCKOFF = ${MAJOR_VERSION}
 
-TAG = ${PYTHON_VERSION}-wee
+TAG = ${PYTHON_VERSION}
 
 IMAGE_TAG = ${IMAGE}:${TAG}
 
