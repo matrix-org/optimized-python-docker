@@ -85,7 +85,6 @@ RUN \
 
 LABEL stage BUILD-SETUP
 LABEL version ${PYTHON_VERSION}
-LABEL march ${MARCH}
 
 ###############################################################################
 FROM build-setup as builder
