@@ -95,7 +95,7 @@ ENV LANG C.UTF-8
 
 #RUN sleep 6000 || echo "whee"
 
-ENV CFLAGS -I/usr/include/openssl
+ENV CFLAGS -I/usr/include/openssl -march=skylake-avx512
 
 RUN set -ex \
     && cd /usr/src/python \

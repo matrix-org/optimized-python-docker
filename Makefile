@@ -2,14 +2,14 @@
 
 include .version
 
-PYTHON_VERSION ?= 3.6.2
+PYTHON_VERSION ?= 3.7.4
 FUCKOFF = ${MAJOR_VERSION}
 
 TAG = ${PYTHON_VERSION}-wee
 
 IMAGE_TAG = ${IMAGE}:${TAG}
 
-BUILD_ARGS = 
+BUILD_ARGS =
 
 
 ifdef PKG_PROXY
