@@ -150,24 +150,10 @@ RUN set -ex; python get-pip.py \
                 --no-cache-dir \
                 "pip==$PYTHON_PIP_VERSION"; pip --version
 
-
-RUN set -ex; pip install pipenv --upgrade
-
-RUN mkdir -p $HOME/.ipython/profile_default ;
-RUN mv ipython_config.py $HOME/.ipython/profile_default/. ;
-RUN pip install ipython ipdb
-
-RUN set -ex;  \
-    find /usr/local -depth \
-        \( \
-            \( -type d -a \( -name test -o -name tests -o -name __pycache__ \) \) \
-            -o \
-            \( -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name '*.exe' \) \) \
-        \) -exec rm -rf '{}' +;
-
-RUN set -ex; \
-    find /usr/share/
 RUN rm -rf /root/.cache
+
+RUN chown -R root:root /usr/local
+RUN chown -R root:root /root
 
 ARG PYTHON_VERSION
 LABEL stage POST-BUILD
@@ -184,4 +170,4 @@ LABEL stage FINAL
 ARG PYTHON_VERSION
 LABEL version ${PYTHON_VERSION}
 
-CMD ["ipython"]
+CMD ["python"]
