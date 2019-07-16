@@ -85,7 +85,7 @@ RUN \
 
 LABEL stage BUILD-SETUP
 LABEL version ${PYTHON_VERSION}
-LABEL march ${CFLAGS}
+LABEL march ${MARCH}
 
 ###############################################################################
 FROM build-setup as builder
@@ -94,7 +94,7 @@ ARG BUILD_ARGS
 ARG PYTHON_VERSION
 ENV LANG C.UTF-8
 
-ENV CFLAGS -I/usr/include/openssl ${CFLAGS}
+ENV CFLAGS -I/usr/include/openssl --march=${MARCH}
 
 RUN set -ex \
     && cd /usr/src/python \
@@ -132,7 +132,7 @@ RUN ["/bin/bash", "-c", "if [[ $( echo ${PYTHON_VERSION} | cut -d'.' -f1 ) == '3
 
 LABEL stage BUILDER
 LABEL version ${PYTHON_VERSION}
-LABEL march ${CFLAGS}
+LABEL march ${MARCH}
 
 ###############################################################################
 FROM builder as post-build
