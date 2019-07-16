@@ -46,7 +46,7 @@ RUN set -ex \
     && apt update \
     && apt -y upgrade \
     && apt-mark unhold apt libcap2 libsemanage1 passwd  \
-    && apt-get install -y curl gnupg libsqlite3-0 zlib1g libexpat1 bash tcpdump procps less binutils libbz2-1.0 netcat-openbsd git uuid-dev liblzma-dev \
+    && apt-get install -y curl gnupg libsqlite3-0 zlib1g libexpat1 bash tcpdump procps less binutils libbz2-1.0 netcat-openbsd git libuuid1 liblzma5 \
     && find /usr -type f -name "*.so" -exec strip --strip-unneeded {} + \
     && apt-get remove binutils --purge -y -qq \
     && find /var/lib/apt/lists \
@@ -68,7 +68,7 @@ ADD gnupg/pubring.gpg gnupg/trustdb.gpg /root/.gnupg/
 RUN set -ex \
     && mkdir -p /root/.gnupg \
     && chmod 700 /root/.gnupg \
-    && buildDeps='libsqlite3-dev zlib1g-dev libexpat1-dev libssl-dev xz-utils dpkg-dev binutils libbz2-dev libreadline-dev libffi-dev' \
+    && buildDeps='libsqlite3-dev zlib1g-dev libexpat1-dev libssl-dev xz-utils dpkg-dev binutils libbz2-dev libreadline-dev libffi-dev uuid-dev liblzma-dev' \
     && apt-get -qq update; apt-get -qq -y install ${buildDeps}
 
 ARG PYTHON_VERSION
