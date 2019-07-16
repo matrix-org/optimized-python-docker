@@ -46,7 +46,7 @@ RUN set -ex \
     && apt update \
     && apt -y upgrade \
     && apt-mark unhold apt libcap2 libsemanage1 passwd  \
-    && apt-get install -y curl gnupg libsqlite3-0 zlib1g libexpat1 bash tcpdump procps less binutils libbz2-1.0 netcat-openbsd git \
+    && apt-get install -y curl gnupg libsqlite3-0 zlib1g libexpat1 bash tcpdump procps less binutils libbz2-1.0 netcat-openbsd git uuid-dev liblzma-dev \
     && find /usr -type f -name "*.so" -exec strip --strip-unneeded {} + \
     && apt-get remove binutils --purge -y -qq \
     && find /var/lib/apt/lists \
