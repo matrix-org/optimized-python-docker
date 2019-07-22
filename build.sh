@@ -2,7 +2,5 @@
 
 set -euox pipefail
 
-LTO=1 OPTIMAL=1 MARCH=skylake-avx512 PYTHON_VERSION=3.7.4 make build-image
-
-# Output it, so we can upload it on a trusted machine
-docker save matrixdotorg/optimised-python:3.7.4-optimized-lto-skylake-avx512 | gzip -9 > docker.tar.gz
+LTO=1 OPTIMAL=1 MARCH=$MARCH PYTHON_VERSION=$PYTHON_VERSION make build-image
+docker save matrixdotorg/optimised-python:$PYTHON_VERSION-optimized-lto-$MARCH | gzip -9 > docker.tar.gz
